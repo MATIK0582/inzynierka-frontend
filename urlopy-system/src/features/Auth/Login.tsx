@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 import useAuth from '../../hooks/useAuth';
@@ -94,6 +94,12 @@ const Login = () => {
                             {...register('password', { required: 'Hasło jest wymagane' })}
                         />
                         {errors.password && <span className="error-message">{errors.password.message}</span>}
+                    </div>
+
+                    <div className="register-link-container">
+                        <p>
+                            Nie masz konta? <Link to="/register">Zarejestruj się</Link>
+                        </p>
                     </div>
 
                     <button type="submit">Zaloguj się</button>

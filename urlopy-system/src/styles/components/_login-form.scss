@@ -93,4 +93,20 @@
             }
         }
     }
+
+    .register-link-container {
+        text-align: right;
+        margin-top: -30px;
+        font-size: 14px;
+
+        a {
+            color: $secondary;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }
