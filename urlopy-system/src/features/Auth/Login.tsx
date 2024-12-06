@@ -41,7 +41,7 @@ const Login = () => {
 
             if (!response.ok) {
                 const errorResponse = await response.json();
-                setError('email', { message: errorResponse.message });
+                setError('password', { message: errorResponse.message });
                 return;
             }
 
