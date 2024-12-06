@@ -18,6 +18,14 @@ const useAuth = () => {
 
     try {
         const decoded = jwtDecode<JwtPayload & User>(token);
+
+        const currentTime = Math.floor(Date.now() / 1000);
+        if (decoded.exp && decoded.exp < currentTime) {
+            console.warn('Token expired.');
+            Cookies.remove('access_token');
+            return { user: null };
+        }
+
         const user: User = {
             id: decoded.id as string,
             role: decoded.role as Roles,

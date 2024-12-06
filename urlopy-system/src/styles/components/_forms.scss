@@ -1,0 +1,96 @@
+@import '../../styles/variables.scss';
+
+.login-form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; // Pełna wysokość ekranu
+    background-color: rgba(0, 0, 0, 0.3); // Lekko przyciemnione tło dla efektu modala
+}
+
+.login-form {
+    width: 30%;
+    background-color: $primary;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    h1 {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        color: $primary900;
+    }
+
+    form {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            label {
+                font-size: 16px;
+                font-weight: bold;
+                color: $primary800;
+            }
+
+            input {
+                width: auto;
+                padding: 10px;
+                font-size: 16px;
+                border: 2px solid $primary700;
+                border-radius: 5px;
+                background-color: transparent;
+                color: $black;
+
+                &:focus {
+                    border-color: $secondary;
+                    outline: none;
+                }
+
+                &.error {
+                    border-color: red;
+                }
+
+                &::placeholder {
+                    color: $primary400;
+                }
+            }
+
+            .error-message {
+                color: red;
+                margin-top: 5px;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: $secondary;
+            color: $white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: lighten($secondary, 10%);
+            }
+
+            &:disabled {
+                background-color: lighten($secondary, 30%);
+                cursor: not-allowed;
+            }
+        }
+    }
+}

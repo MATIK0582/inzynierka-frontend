@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { Roles } from '../utils/roles';
@@ -12,13 +13,15 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    if (!user) {
-        navigate('/login', { state: { from: location } });
-        return null;
-    }
+    useEffect(() => {
+        if (!user) {
+            navigate('/login', { state: { from: location } });
+        } else if (!allowedRoles.includes(user.role)) {
+            navigate('/home');
+        }
+    }, [user, allowedRoles, navigate, location]);
 
-    if (!allowedRoles.includes(user.role as Roles)) {
-        navigate('/home');
+    if (!user || !allowedRoles.includes(user.role)) {
         return null;
     }
 
