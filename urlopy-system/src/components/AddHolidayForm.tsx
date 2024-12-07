@@ -52,7 +52,7 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
         console.log(data);
 
         try {
-            const accessToken = Cookies.get('access_token'); // Pobranie access_token z ciasteczek
+            const accessToken = Cookies.get('access_token');
             if (!accessToken) {
                 throw new Error('Brak tokena dostępu. Proszę się zalogować.');
             }
@@ -61,9 +61,9 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`, // Dodanie tokena do nagłówka
+                    'Authorization': `Bearer ${accessToken}`,
                 },
-                credentials: 'include', // Uwzględnienie ciasteczek (np. refresh_token)
+                credentials: 'include',
                 body: JSON.stringify({
                     ...data,
                     holidayType: data.onDemand ? HolidayType.ON_DEMAND : data.holidayType,
@@ -76,7 +76,7 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                 return;
             }
 
-            onSubmitSuccess(); // Wywołanie funkcji sukcesu
+            onSubmitSuccess();
         } catch (error) {
             console.error('Nie udało się dodać urlopu:', error);
         }
@@ -115,6 +115,7 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                         },
                     })}
                 />
+                {/* @TODO: Past date error: Border red when startdate is changed */}
                 {errors.endDate && <span className="error-message">{errors.endDate.message}</span>}
             </div>
 
@@ -125,7 +126,7 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                     className={errors.holidayType ? 'error' : ''}
                     {...register('holidayType', { required: 'Typ urlopu jest wymagany' })}
                 >
-                    <option value={HolidayType.ANNUAL}>Roczny</option>
+                    <option value={HolidayType.ANNUAL}>Wypoczynkowy</option>
                     <option value={HolidayType.SICK}>Chorobowy</option>
                 </select>
                 {errors.holidayType && <span className="error-message">{errors.holidayType.message}</span>}

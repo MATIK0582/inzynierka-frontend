@@ -77,8 +77,13 @@
             outline: none;
             transition: background-color 0.3s;
 
+            &:focus {
+                border-color: $primary400;
+                outline: none;
+            }
+
             &:checked {
-                background-color: $secondary;
+                background-color: green;
             }
 
             &::before {
