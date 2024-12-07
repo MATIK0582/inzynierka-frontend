@@ -1,0 +1,123 @@
+@import '../../styles/variables.scss';
+
+.add-holiday-form {
+    background-color: $primary;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: $primary800;
+        }
+
+        input,
+        select,
+        textarea {
+            width: auto;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid $primary700;
+            border-radius: 5px;
+            background-color: transparent;
+            color: $black;
+
+            &:focus {
+                border-color: $secondary;
+                outline: none;
+            }
+
+            &.error {
+                border-color: red;
+            }
+
+            &::placeholder {
+                color: $primary400;
+            }
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    }
+
+    .toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        span {
+            font-size: 16px;
+            color: $primary800;
+        }
+
+        input[type='checkbox'] {
+            width: 40px;
+            height: 20px;
+            appearance: none;
+            background-color: $primary400;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s;
+
+            &:checked {
+                background-color: $secondary;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                background-color: $white;
+                border-radius: 50%;
+                top: 1px;
+                left: 1px;
+                transition: transform 0.3s;
+            }
+
+            &:checked::before {
+                transform: translateX(20px);
+            }
+        }
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: $secondary;
+        color: $white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: lighten($secondary, 10%);
+        }
+
+        &:disabled {
+            background-color: lighten($secondary, 30%);
+            cursor: not-allowed;
+        }
+    }
+}

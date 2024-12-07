@@ -1,0 +1,138 @@
+.calendar-container {
+    margin: 20px auto;
+    width: 100%;
+    max-width: calc(100% - 40px);
+    padding: 10px;
+    box-sizing: border-box;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #212121;
+        }
+
+        .add-holiday-button {
+            background-color: #9fc5f8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #7fa5d8;
+            }
+        }
+    }
+
+    .react-calendar {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        width: 100%;
+
+        .react-calendar__navigation {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .react-calendar__month-view__weekdays {
+            background-color: #e0e0e0; // Lekko ciemny szary
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .react-calendar__tile {
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            height: 100px;
+            padding: 5px;
+            text-align: center;
+
+            .date {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .holiday-container {
+                margin-top: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+
+                .holiday-indicator {
+                    border-radius: 5px;
+                    font-size: 10px;
+                    padding: 2px 5px;
+                    margin: 2px 0;
+                    width: calc(100% - 10px);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    color: #000 !important;
+
+                    &.approved {
+                        background-color: rgba(25, 116, 235, 0.8); // Półprzezroczysty niebieski
+                    }
+
+                    &.accepted_by_team_leader {
+                        background-color: rgba(144, 238, 144, 0.6); // Półprzezroczysty jasno-zielony
+                    }
+
+                    &.pending {
+                        background-color: rgba(255, 165, 0, 0.6); // Półprzezroczysty jasno-pomarańczowy
+                    }
+
+                    &.rejected {
+                        background-color: rgba(255, 99, 71, 0.6); // Półprzezroczysty jasno-czerwony
+                    }
+                }
+
+                .holiday-more {
+                    color: #616161;
+                    font-size: 10px;
+                    margin-top: 2px;
+                }
+            }
+        }
+
+        .react-calendar__tile--now {
+            background: white;
+
+            abbr {
+                border: 2px solid #ffa500; // Pomarańczowy kolor
+                background-color: #ffa500;
+                border-radius: 100%;
+                // width: 1.5em;
+            }
+        }
+
+        .react-calendar__month-view__days__day{
+            abbr {
+                width: 1.5em;
+            }
+        }
+
+        .react-calendar__tile--active {
+            background-color: #9fc5f8 ;
+            color: #fff;
+
+            .holiday-container .holiday-indicator {
+                color: #000 !important; // Zachowanie czarnego tekstu opisu
+            }
+        }
+    }
+}

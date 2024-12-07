@@ -1,5 +1,10 @@
 @import "./components/_login-form.scss";
 @import "./components/_register-form.scss";
+@import "./components/_calendar.scss";
+@import "./components/_holiday-details-modal.scss";
+@import "./components/add-holiday-modal.scss";
+@import "./components/add-holiday-form.scss";
+@import '~react-calendar/dist/Calendar.css';
 
 
 body {

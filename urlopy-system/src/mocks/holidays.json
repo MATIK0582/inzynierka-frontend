@@ -1,0 +1,30 @@
+[
+  {
+    "startDate": "2024-12-15",
+    "endDate": "2024-12-20",
+    "description": "mock1",
+    "holidayType": "annual",
+    "status": "pending"
+  },
+  {
+    "startDate": "2024-12-20",
+    "endDate": "2024-12-22",
+    "description": "mock2",
+    "holidayType": "sick",
+    "status": "accepted_by_team_leader"
+  },
+  {
+    "startDate": "2024-12-25",
+    "endDate": "2024-12-26",
+    "description": "mock3",
+    "holidayType": "annual",
+    "status": "approved"
+  },
+  {
+    "startDate": "2024-12-05",
+    "endDate": "2024-12-06",
+    "description": "mock3",
+    "holidayType": "annual",
+    "status": "rejected"
+  }
+]
