@@ -25,16 +25,19 @@ const HolidayDetailsModal: React.FC<HolidayDetailsModalProps> = ({ isOpen, holid
                 </button>
                 <h2>Detale Urlopu</h2>
                 <p>
-                    <strong>Okres urlopu:</strong><p>{holiday.startDate.replace(/-/g,"/")} - {holiday.endDate.replace(/-/g,"/")}</p> 
+                    <strong>Okres urlopu:</strong>{' '}
+                    <p>
+                        {holiday.startDate.replace(/-/g, '/')} - {holiday.endDate.replace(/-/g, '/')}
+                    </p>
                 </p>
                 <p>
-                    <strong>Typ urlopu:</strong><p>{holiday.holidayType}</p> 
+                    <strong>Typ urlopu:</strong> <p>{holiday.holidayType}</p>
                 </p>
                 <p>
-                    <strong>Opis:</strong><p>{holiday.description}</p> 
+                    <strong>Opis:</strong> <p>{holiday.description}</p>
                 </p>
                 <p>
-                    <strong>Status:</strong><p>{holiday.status}</p>  
+                    <strong>Status:</strong> <p>{holiday.status}</p>
                 </p>
             </div>
         </div>

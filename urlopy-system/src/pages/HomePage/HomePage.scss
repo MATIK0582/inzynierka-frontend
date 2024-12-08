@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .main-content {
+        flex: 1;
+        background-color: $primary;
+        padding: 20px;
+    }
+}

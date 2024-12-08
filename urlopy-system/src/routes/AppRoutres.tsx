@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../features/Auth/Login";
-import Register from "../features/Auth/Register";
-import CalendarView from "../features/Calendar/Calendar";
-import Profile from "../features/Profile/Profile";
-import ProtectedRoute from "../components/ProtectedRoute";
-import { Roles } from "../utils/roles";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from '../features/Auth/Login';
+import Register from '../features/Auth/Register';
+import HomePage from '../pages/HomePage/HomePage';
+import Profile from '../features/Profile/Profile';
+import ProtectedRoute from '../components/ProtectedRoute';
+import VacationPage from '../pages/Vacations/Vacations';
+import { Roles } from '../utils/roles';
 
 const AppRoutes = () => (
     <Router>
@@ -15,7 +16,7 @@ const AppRoutes = () => (
                 path="/home"
                 element={
                     <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
-                        <CalendarView />
+                        <HomePage />
                     </ProtectedRoute>
                 }
             />
@@ -27,7 +28,14 @@ const AppRoutes = () => (
                     </ProtectedRoute>
                 }
             />
-            {/* Dodaj pozostałe ścieżki z odpowiednimi rolami */}
+            <Route
+                path="/vacations"
+                element={
+                    <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                        <VacationPage />
+                    </ProtectedRoute>
+                }
+            />
         </Routes>
     </Router>
 );
