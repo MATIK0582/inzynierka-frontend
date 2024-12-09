@@ -18,7 +18,7 @@ interface Holiday {
     surname: string;
 }
 
-const VacationPage = () => {
+const Vacations = () => {
     const [pendingHolidays, setPendingHolidays] = useState<Holiday[]>([]);
     const [acceptedHolidays, setAcceptedHolidays] = useState<Holiday[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -35,7 +35,7 @@ const VacationPage = () => {
                 const accessToken = Cookies.get('access_token');
                 if (!accessToken) throw new Error('Brak tokenu dostępu.');
 
-                const response = await fetch('http://localhost:5000/holiday/own', {
+                const response = await fetch('http://localhost:5000/holiday/all', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -133,4 +133,4 @@ const VacationPage = () => {
     );
 };
 
-export default VacationPage;
+export default Vacations;
