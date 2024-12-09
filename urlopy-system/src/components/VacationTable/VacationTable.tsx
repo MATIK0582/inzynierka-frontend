@@ -12,7 +12,7 @@ interface VacationTableProps {
         status?: string;
     }>;
     columns: string[];
-    onRowClick?: (holiday: any) => void; // onRowClick event handler
+    onRowClick?: (holiday: any) => void;
 }
 
 const VacationTable: React.FC<VacationTableProps> = ({ data, columns, onRowClick }) => {
@@ -63,10 +63,9 @@ const VacationTable: React.FC<VacationTableProps> = ({ data, columns, onRowClick
                 {rows.map((row) => {
                     prepareRow(row);
                     return (
-                        <tr 
-                            {...row.getRowProps()} 
-                            onClick={() => onRowClick?.(row.original)} // Handle row click
-                            className="clickable-row"
+                        <tr
+                            {...row.getRowProps()}
+                            onClick={() => onRowClick && onRowClick(row.original)} // Obsługa kliknięcia w wiersz
                         >
                             {row.cells.map((cell) => (
                                 <td {...cell.getCellProps()}>{cell.render('Cell')}</td>

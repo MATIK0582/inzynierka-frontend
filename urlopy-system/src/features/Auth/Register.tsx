@@ -1,17 +1,18 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../utils/validation';
 
 interface RegisterFormInputs {
-    firstName: string;
-    lastName: string;
+    name: string;
+    surname: string;
     email: string;
     password: string;
     confirmPassword: string;
 }
 
 const Register = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -23,6 +24,9 @@ const Register = () => {
 
     const onSubmit = async (data: RegisterFormInputs) => {
         try {
+
+            console.log(data);
+
             const response = await fetch('http://localhost:5000/user/create', {
                 method: 'POST',
                 headers: {
@@ -38,7 +42,7 @@ const Register = () => {
             }
 
             console.log('User registered successfully');
-            // Można dodać przekierowanie do logowania, jeśli rejestracja się powiedzie
+            navigate('/login');
         } catch (error) {
             console.error('Unexpected error:', error);
         }
@@ -50,31 +54,31 @@ const Register = () => {
                 <h1>Rejestracja</h1>
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <div className="input-group">
-                        <label htmlFor="firstName">Imię</label>
+                        <label htmlFor="name">Imię</label>
                         <input
-                            id="firstName"
+                            id="name"
                             type="text"
                             placeholder="Wprowadź swoje imię"
-                            className={errors.firstName ? 'error' : ''}
-                            {...register('firstName', {
+                            className={errors.name ? 'error' : ''}
+                            {...register('name', {
                                 required: 'Imię jest wymagane',
                             })}
                         />
-                        {errors.firstName && <span className="error-message">{errors.firstName.message}</span>}
+                        {errors.name && <span className="error-message">{errors.name.message}</span>}
                     </div>
 
                     <div className="input-group">
-                        <label htmlFor="lastName">Nazwisko</label>
+                        <label htmlFor="surname">Nazwisko</label>
                         <input
-                            id="lastName"
+                            id="surname"
                             type="text"
                             placeholder="Wprowadź swoje nazwisko"
-                            className={errors.lastName ? 'error' : ''}
-                            {...register('lastName', {
+                            className={errors.surname ? 'error' : ''}
+                            {...register('surname', {
                                 required: 'Nazwisko jest wymagane',
                             })}
                         />
-                        {errors.lastName && <span className="error-message">{errors.lastName.message}</span>}
+                        {errors.surname && <span className="error-message">{errors.surname.message}</span>}
                     </div>
 
                     <div className="input-group">
