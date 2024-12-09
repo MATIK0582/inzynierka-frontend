@@ -1,0 +1,68 @@
+@import '../../styles/variables.scss';
+
+html {
+    background-color: #f5f5f5;
+}
+
+.pending-vacations-page {
+    .main-content {
+        flex: 1 1;
+        background-color: #f5f5f5;
+        padding: 40px;
+
+        .header-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 2px solid $secondary;
+
+            h1 {
+                color: $primary900;
+                text-align: left;
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+
+            .nav-button {
+                background-color: $primary700;
+                color: $white;
+                padding: 10px 20px;
+                font-size: 14px;
+                font-weight: bold;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: $primary900;
+                }
+
+                &.active {
+                    background-color: $secondary;
+                    color: $white;
+                }
+            }
+        }
+
+        h2 {
+            color: $primary900;
+            font-size: 24px;
+            margin-bottom: 0px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .pending-vacation-table {
+            tbody {
+                max-height: 250px;
+                overflow-y: auto;
+            }
+        }
+    }
+}

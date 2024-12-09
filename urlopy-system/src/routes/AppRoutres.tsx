@@ -3,10 +3,10 @@ import Login from '../features/Auth/Login';
 import Register from '../features/Auth/Register';
 import HomePage from '../pages/HomePage/HomePage';
 import ProtectedRoute from '../components/ProtectedRoute';
-import Vacations from '../pages/Vacations/Vacations';
-import { Roles } from '../utils/roles';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import VacationsPage from '../pages/Vacations/VacationPage';
+import PendingVacationsPage from '../pages/Vacations/PendingVacationsPage';
+import { Roles } from '../utils/roles';
 
 const AppRoutes = () => (
     <Router>
@@ -34,6 +34,14 @@ const AppRoutes = () => (
                 element={
                     <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
                         <VacationsPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/vacations/pending"
+                element={
+                    <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                        <PendingVacationsPage />
                     </ProtectedRoute>
                 }
             />
