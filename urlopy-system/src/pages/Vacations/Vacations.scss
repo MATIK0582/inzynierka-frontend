@@ -3,6 +3,42 @@
 .vacation-page {
     padding: 20px;
 
+    .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        margin-bottom: -50px;
+        margin-top: 10px;
+
+        h1 {
+            color: $primary900;
+            text-align: left;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            background-color: #9fc5f8;
+            color: $white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: $primary900;
+            }
+
+            &.active {
+                background-color: $secondary;
+                color: $white;
+            }
+        }
+    }
+
     h1 {
         text-align: center;
         color: $primary900;
@@ -28,10 +64,9 @@
             padding-bottom: 5px;
         }
 
-        &.pending-holidays {
+        &.upcoming-holidays {
             .vacation-table {
                 tbody {
-                    // display: block;
                     max-height: 250px;
                     overflow-y: auto;
                 }
@@ -41,7 +76,6 @@
         &.accepted-holidays {
             .vacation-table {
                 tbody {
-                    // display: block;
                     max-height: 250px;
                     overflow-y: auto;
                 }

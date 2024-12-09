@@ -36,7 +36,7 @@ const CalendarView = () => {
             isWithinInterval(date, {
                 start: parseISO(holiday.startDate),
                 end: parseISO(holiday.endDate),
-            }),
+            })
         );
 
         if (dayHolidays.length > 0) {
@@ -77,7 +77,12 @@ const CalendarView = () => {
                 onClose={() => setIsDetailsModalOpen(false)}
             />
             <AddHolidayModal isOpen={isAddHolidayModalOpen} onClose={() => setIsAddHolidayModalOpen(false)}>
-                <AddHolidayForm onSubmitSuccess={() => console.log('Holiday added successfully')} />
+                <AddHolidayForm 
+                    onSubmitSuccess={() => {
+                        console.log('Holiday added successfully');
+                        window.location.reload();
+                    }} 
+                />
             </AddHolidayModal>
         </div>
     );

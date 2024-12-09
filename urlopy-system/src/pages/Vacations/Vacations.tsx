@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import VacationTable from '../../components/VacationTable/VacationTable';
 import HolidayDetailsModal from '../../components/HolidayDetailsModal';
 import Cookies from 'js-cookie';
@@ -19,12 +20,13 @@ interface Holiday {
 }
 
 const Vacations = () => {
-    const [pendingHolidays, setPendingHolidays] = useState<Holiday[]>([]);
+    const [upcomingHolidays, setUpcomingHolidays] = useState<Holiday[]>([]);
     const [acceptedHolidays, setAcceptedHolidays] = useState<Holiday[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedHoliday, setSelectedHoliday] = useState<Holiday | null>(null);
     const [isDetailsModalOpen, setIsDetailsModalOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchHolidays = async () => {
@@ -50,10 +52,14 @@ const Vacations = () => {
                 const responseData = await response.json();
                 const holidaysData: Holiday[] = JSON.parse(responseData.message);
 
-                const pending = holidaysData.filter((holiday) => holiday.status === 'pending');
+                const today = new Date().toISOString().split('T')[0];
+                const upcoming = holidaysData.filter(
+                    (holiday) => holiday.status === 'accepted' && holiday.startDate > today
+                );
+                
                 const accepted = holidaysData.filter((holiday) => holiday.status === 'accepted');
 
-                setPendingHolidays(pending);
+                setUpcomingHolidays(upcoming);
                 setAcceptedHolidays(accepted);
             } catch (error: any) {
                 console.error('Błąd podczas pobierania urlopów:', error);
@@ -91,7 +97,11 @@ const Vacations = () => {
 
     return (
         <div className="vacation-page">
-            <h1>Urlopy użytkownika</h1>
+            <div className="header-wrapper">
+                <button className="nav-button" onClick={() => navigate('/vacations/pending')}>
+                    Oczekujące urlopy
+                </button>
+            </div>
 
             {error && <div className="error-message">{error}</div>}
 
@@ -99,11 +109,11 @@ const Vacations = () => {
                 <p>Ładowanie danych...</p>
             ) : (
                 <>
-                    <section className="pending-holidays">
-                        <h2>Oczekujące urlopy</h2>
+                    <section className="upcoming-holidays">
+                        <h2>Nadchodzące urlopy</h2>
                         <VacationTable
-                            data={pendingHolidays}
-                            columns={['Pracownik', 'Data rozpoczęcia', 'Data zakończenia', 'Typ urlopu', 'Status']}
+                            data={upcomingHolidays}
+                            columns={['Pracownik', 'Data rozpoczęcia', 'Data zakończenia', 'Typ urlopu']}
                             onRowClick={handleRowClick}
                         />
                     </section>
