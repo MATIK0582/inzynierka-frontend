@@ -57,7 +57,7 @@ const Vacations = () => {
                     (holiday) => holiday.status === 'accepted' && holiday.startDate > today
                 );
                 
-                const accepted = holidaysData.filter((holiday) => holiday.status === 'accepted');
+                const accepted = holidaysData.filter((holiday) => holiday.status === 'accepted' && holiday.startDate <= today);
 
                 setUpcomingHolidays(upcoming);
                 setAcceptedHolidays(accepted);
