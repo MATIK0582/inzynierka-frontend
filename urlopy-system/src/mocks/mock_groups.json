@@ -1,0 +1,32 @@
+[
+    {
+        "id": "c16e1f16-42c2-4876-86f3-95cc34b9291c",
+        "leaderId": "f9d3e7d9-b582-4c6c-9a70-d2d79c27b5b8",
+        "name": "Grupa Alfa",
+        "numberOfEmployees": 12
+    },
+    {
+        "id": "cde1f16a-84c2-4234-81f3-91cc14b9291c",
+        "leaderId": "a2d3e7a9-d582-4c2c-9a90-d2d79c27b5a8",
+        "name": "Grupa Beta",
+        "numberOfEmployees": 9
+    },
+    {
+        "id": "c36e2f16-42c3-4877-86f3-85cc14b9291c",
+        "leaderId": "f1d3e7d8-b582-4c6c-9a70-d2d79c27b5b8",
+        "name": "Grupa Gamma",
+        "numberOfEmployees": 15
+    },
+    {
+        "id": "c46e1f36-52c2-4876-86f3-95cc24b9291c",
+        "leaderId": "f2d3e7c9-b682-4c6c-9a80-d2d79c27b5b8",
+        "name": "Grupa Delta",
+        "numberOfEmployees": 7
+    },
+    {
+        "id": "c56e1f26-62c2-4876-96f3-85cc34b9291c",
+        "leaderId": "f3d3e7b9-b482-4c6c-9a70-d2d79c27b5b8",
+        "name": "Grupa Epsilon",
+        "numberOfEmployees": 20
+    }
+]
