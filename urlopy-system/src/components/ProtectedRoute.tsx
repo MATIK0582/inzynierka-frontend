@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
         if (!user) {
             navigate('/login', { state: { from: location } });
         } else if (!allowedRoles.includes(user.role)) {
-            navigate('/home');
+            navigate('/');
         }
     }, [user, allowedRoles, navigate, location]);
 

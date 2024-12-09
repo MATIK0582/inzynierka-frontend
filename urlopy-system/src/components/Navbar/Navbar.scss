@@ -23,9 +23,14 @@
         font-weight: bold;
         color: $black;
         text-align: left;
+        text-decoration: none;
 
         .user-name {
             color: $primary900;
+        }
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 

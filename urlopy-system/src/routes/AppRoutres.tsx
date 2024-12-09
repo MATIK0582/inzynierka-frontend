@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../features/Auth/Login';
 import Register from '../features/Auth/Register';
 import HomePage from '../pages/HomePage/HomePage';
-import Profile from '../features/Profile/Profile';
 import ProtectedRoute from '../components/ProtectedRoute';
 import VacationPage from '../pages/Vacations/Vacations';
 import { Roles } from '../utils/roles';
+import ProfilePage from '../pages/Profile/ProfilePage';
 
 const AppRoutes = () => (
     <Router>
@@ -13,7 +13,7 @@ const AppRoutes = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
-                path="/home"
+                path="/"
                 element={
                     <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
                         <HomePage />
@@ -24,7 +24,7 @@ const AppRoutes = () => (
                 path="/profile"
                 element={
                     <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
-                        <Profile />
+                        <ProfilePage />
                     </ProtectedRoute>
                 }
             />

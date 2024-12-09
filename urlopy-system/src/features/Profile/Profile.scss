@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+
+.profile-page {
+    padding: 20px;
+
+    .user-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        margin-bottom: 20px;
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: $primary900;
+            margin-bottom: 0px;
+            position: relative;
+        }
+
+        h4 {
+            font-size: 16px;
+            color: $primary700;
+            margin-top: 0;
+        }
+    }
+
+    .error-message {
+        color: red;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .pending-holidays,
+    .accepted-holidays {
+        margin-bottom: 40px;
+
+        h2 {
+            color: $primary900;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid $secondary;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: $primary800;
+            font-size: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid $primary300;
+            padding-bottom: 5px;
+        }
+
+        .vacation-table {
+            tbody {
+                max-height: 250px; // Ustawienie scrolla dla tabeli
+                overflow-y: auto;
+            }
+        }
+    }
+}

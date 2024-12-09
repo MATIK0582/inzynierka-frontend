@@ -17,7 +17,7 @@ const Login = () => {
 
     useEffect(() => {
         if (user) {
-            navigate('/home');
+            navigate('/');
         }
     }, [user, navigate]);
 
@@ -57,7 +57,7 @@ const Login = () => {
                 sameSite: 'Strict',
             });
 
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             console.error('Error during login:', error);
             setError('email', { message: 'Wystąpił błąd podczas logowania.' });

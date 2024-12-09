@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                 links = [
                     { path: '/profile', label: 'Profil' },
                     { path: '/vacations', label: 'Urlopy' },
-                    { path: '/home', label: 'Kalendarz' },
+                    { path: '/', label: 'Kalendarz' },
                 ];
                 break;
             case Roles.TEAM_LEADER:
@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
                     { path: '/employees', label: 'Pracownicy' },
                     { path: '/groups', label: 'Grupy' },
                     { path: '/vacations', label: 'Urlopy' },
-                    { path: '/home', label: 'Kalendarz' },
+                    { path: '/', label: 'Kalendarz' },
                 ];
                 break;
             default:
@@ -55,9 +55,9 @@ const Navbar: React.FC = () => {
         <nav className="navbar">
             <div className="navbar-content">
                 {user && (
-                    <div className="navbar-greeting">
+                    <Link to="/profile" className="navbar-greeting">
                         Witaj, <span className="user-name">Mateusz!</span>
-                    </div>
+                    </Link>
                 )}
                 <ul className="nav-links">
                     {renderLinks()}
