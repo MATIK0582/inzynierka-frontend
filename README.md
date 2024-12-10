@@ -1,7 +1,6 @@
-# inzynierka-frontend
-# **Aplikacja kliencka do zarządzania urlopami**
+# Praca inżynierska - frontend
 
-To jest **Aplikacja do zarządzania urlopami** zbudowana przy użyciu **React**, **TypeScript** oraz **Yarn**. Poniżej znajdziesz podstawowe instrukcje dotyczące uruchomienia aplikacji na komputerze, który nigdy wcześniej nie miał uruchomionego Reacta ani Yarna.
+Jest to **interfejs użytkownika** aplikacji służącej do zarządzania urlopami, zbudowanej przy użyciu **React**, **TypeScript** oraz **Yarn**. Poniżej znajdziesz podstawowe instrukcje dotyczące uruchomienia aplikacji na komputerze, który nigdy wcześniej nie miał uruchomionego Reacta ani Yarna.
 
 ---
 
@@ -42,7 +41,7 @@ Przed uruchomieniem aplikacji upewnij się, że na Twoim komputerze są zainstal
   cd ./urlopy-system
   ```
 
-2. **Instalowanie zależnośi**:
+2. **Instalowanie zależności**:
 
   Zainstaluj zależności projektu:
   ```bash
