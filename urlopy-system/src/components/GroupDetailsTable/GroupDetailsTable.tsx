@@ -1,47 +1,42 @@
 import React from 'react';
 import { useTable, Column } from 'react-table';
-import { useNavigate } from 'react-router-dom';
-import './GroupsTable.scss';
+import './GroupDetailsTable.scss';
 
-interface Group {
+interface Employee {
     id: string;
     name: string;
-    leaderId: string;
-    numberOfEmployees: number;
+    surname: string;
+    holiday: number;
 }
 
-interface GroupsTableProps {
-    data: Group[];
+interface GroupDetailsTableProps {
+    data: Employee[];
 }
 
-const GroupsTable: React.FC<GroupsTableProps> = ({ data }) => {
-    const navigate = useNavigate();
-
-    const columns: Column<Group>[] = React.useMemo(
+const GroupDetailsTable: React.FC<GroupDetailsTableProps> = ({ data }) => {
+    const columns: Column<Employee>[] = React.useMemo(
         () => [
             {
-                Header: 'Nazwa grupy',
-                accessor: 'name',
+                Header: 'Pracownik',
+                accessor: (row: Employee) => `${row.name} ${row.surname}`, // Łączenie imienia i nazwiska w jedną kolumnę
             },
             {
-                Header: 'Lider grupy',
-                accessor: 'leaderId',
-            },
-            {
-                Header: 'Liczba pracowników',
-                accessor: 'numberOfEmployees',
+                Header: 'Pozostałe dni urlopu',
+                accessor: 'holiday', // Dostęp do holiday
             },
         ],
         []
     );
 
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<Group>({
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<Employee>({
         columns,
         data,
     });
 
+    console.log(data);
+
     return (
-        <table {...getTableProps()} className="groups-table">
+        <table {...getTableProps()} className="group-details-table">
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -55,11 +50,7 @@ const GroupsTable: React.FC<GroupsTableProps> = ({ data }) => {
                 {rows.map((row) => {
                     prepareRow(row);
                     return (
-                        <tr
-                            {...row.getRowProps()}
-                            onClick={() => navigate(`/groups/${row.original.id}`)} // Przenoszenie na podstronę grupy
-                            className="clickable-row"
-                        >
+                        <tr {...row.getRowProps()}>
                             {row.cells.map((cell) => (
                                 <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                             ))}
@@ -71,4 +62,4 @@ const GroupsTable: React.FC<GroupsTableProps> = ({ data }) => {
     );
 };
 
-export default GroupsTable;
+export default GroupDetailsTable;

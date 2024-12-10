@@ -1,0 +1,8 @@
+
+[
+    { "id": "1", "name": "Adam", "surname": "Kowalski", "holiday": 14 },
+    { "id": "2", "name": "Ewa", "surname": "Nowak", "holiday": 10 },
+    { "id": "3", "name": "Jan", "surname": "Wiśniewski", "holiday": 20 },
+    { "id": "4", "name": "Anna", "surname": "Zielińska", "holiday": 12 },
+    { "id": "5", "name": "Piotr", "surname": "Mazur", "holiday": 18 }
+]

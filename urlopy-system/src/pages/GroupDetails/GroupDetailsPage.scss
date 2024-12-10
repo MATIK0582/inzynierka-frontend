@@ -1,0 +1,136 @@
+@import '../../styles/variables.scss';
+
+.group-details-page {
+    .main-content {
+        padding: 20px;
+
+        h1 {
+            color: $primary900;
+            text-align: left;
+            font-size: 32px;
+            margin-bottom: 0px;
+        }
+
+        .header-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            h1 {
+                color: $primary900;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .add-member-button {
+                background-color: $secondary;
+                color: $white;
+                padding: 10px 20px;
+                font-size: 14px;
+                font-weight: bold;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: darken($secondary, 10%);
+                }
+            }
+        }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .group-details-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+
+            thead {
+                background-color: #3b3939;
+
+                th {
+                    color: $white;
+                    text-align: center;
+                    font-weight: bold;
+                    padding: 12px;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    border-right: 1px solid $primary300;
+
+                    &:last-child {
+                        border-right: none;
+                    }
+
+                    &.sortable {
+                        cursor: pointer;
+
+                        &:hover {
+                            color: $secondary;
+                        }
+                    }
+
+                    &.active {
+                        border-bottom: 2px solid $secondary;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    &:nth-child(even) {
+                        background-color: #e0d8d8;
+                    }
+
+                    &:hover {
+                        background-color: $primary300;
+                        cursor: pointer;
+                    }
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    font-size: 14px;
+                    color: $primary900;
+                    border-right: 1px solid $primary300;
+
+                    &:last-child {
+                        border-right: none;
+                    }
+                }
+            }
+
+            @media (max-width: $md-breakpoint) {
+                display: block;
+                overflow-x: auto;
+
+                thead {
+                    display: block;
+                }
+
+                tbody {
+                    display: block;
+
+                    tr {
+                        display: table;
+                        width: 100%;
+                        table-layout: fixed;
+                    }
+
+                    td {
+                        display: table-cell;
+                    }
+                }
+            }
+        }
+    }
+}

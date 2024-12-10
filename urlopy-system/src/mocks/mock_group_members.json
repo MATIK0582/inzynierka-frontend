@@ -1,0 +1,25 @@
+[
+    {
+        "id": "1",
+        "name": "Adam",
+        "surname": "Kowalski",
+        "holiday": 14,
+        "groupId": "c16e1f16-42c2-4876-86f3-95cc34b9291c"
+    },
+    { "id": "2", "name": "Ewa", "surname": "Nowak", "holiday": 10, "groupId": "c16e1f16-42c2-4876-86f3-95cc34b9291c" },
+    {
+        "id": "3",
+        "name": "Jan",
+        "surname": "Wiśniewski",
+        "holiday": 20,
+        "groupId": "c16e1f16-42c2-4876-86f3-95cc34b9291c"
+    },
+    {
+        "id": "4",
+        "name": "Anna",
+        "surname": "Zielińska",
+        "holiday": 12,
+        "groupId": "c16e1f16-42c2-4876-86f3-95cc34b9291c"
+    },
+    { "id": "5", "name": "Piotr", "surname": "Mazur", "holiday": 18, "groupId": "c16e1f16-42c2-4876-86f3-95cc34b9291c" }
+]

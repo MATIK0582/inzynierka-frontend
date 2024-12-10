@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.groups-table {
+.group-details-table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
@@ -63,7 +63,6 @@
         }
     }
 
-    // Styl przewijania tabeli na mniejszych ekranach
     @media (max-width: $md-breakpoint) {
         display: block;
         overflow-x: auto;
@@ -84,49 +83,6 @@
             td {
                 display: table-cell;
             }
-        }
-    }
-
-    .clickable-row {
-        cursor: pointer;
-        &:hover {
-            background-color: lighten($primary300, 10%);
-        }
-    }    
-}
-
-.header-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    border-bottom: 2px solid $secondary;
-
-    h1 {
-        color: $primary900;
-        font-size: 32px;
-        text-align: left;
-        margin-bottom: 20px;
-    }
-
-    .add-group-button {
-        background-color: #9fc5f8;
-        color: $white;
-        padding: 10px 20px;
-        font-size: 14px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-
-        &:hover {
-            background-color: $primary900;
-        }
-
-        &.active {
-            background-color: $secondary;
-            color: $white;
         }
     }
 }

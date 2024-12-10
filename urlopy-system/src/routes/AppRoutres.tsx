@@ -8,20 +8,13 @@ import PendingVacationsPage from '../pages/Vacations/PendingVacationsPage';
 import GroupPage from '../pages/Groups/GroupPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 import { Roles } from '../utils/roles';
+import GroupDetailsPage from '../pages/GroupDetails/GroupDetailsPage';
 
 const AppRoutes = () => (
-    <Router>
+    <Router basename="/">
         <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route
-                path="/"
-                element={
-                    <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
-                        <HomePage />
-                    </ProtectedRoute>
-                }
-            />
             <Route
                 path="/profile"
                 element={
@@ -51,6 +44,22 @@ const AppRoutes = () => (
                 element={
                     <ProtectedRoute allowedRoles={[Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
                         <GroupPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/groups/:id"
+                element={
+                    <ProtectedRoute allowedRoles={[Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                        <GroupDetailsPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                index
+                element={
+                    <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                        <HomePage />
                     </ProtectedRoute>
                 }
             />
