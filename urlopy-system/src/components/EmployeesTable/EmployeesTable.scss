@@ -1,0 +1,88 @@
+@import '../../styles/variables.scss';
+
+.employees-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+    thead {
+        background-color: #3b3939;
+
+        th {
+            color: $white;
+            text-align: center;
+            font-weight: bold;
+            padding: 12px;
+            font-size: 16px;
+            text-transform: uppercase;
+            border-right: 1px solid $primary300;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &.sortable {
+                cursor: pointer;
+
+                &:hover {
+                    color: $secondary;
+                }
+            }
+
+            &.active {
+                border-bottom: 2px solid $secondary;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: #e0d8d8;
+            }
+
+            &:hover {
+                background-color: $primary300;
+                cursor: pointer;
+            }
+        }
+
+        td {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            color: $primary900;
+            border-right: 1px solid $primary300;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+
+    @media (max-width: $md-breakpoint) {
+        display: block;
+        overflow-x: auto;
+
+        thead {
+            display: block;
+        }
+
+        tbody {
+            display: block;
+
+            tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            td {
+                display: table-cell;
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+[
+    {
+        "id": "1bb1cfbd-0776-4eba-ba4d-d328c11eae3d",
+        "name": "Mateusz",
+        "surname": "Topczewski",
+        "email": "tomasz.szymański@example.com",
+        "role": "Administrator",
+        "groupName": "Student",
+        "holidays": 13
+    },
+    {
+        "id": "c3274dfd-83d4-499c-a981-04cf2b0ab1f7",
+        "name": "Agnieszka",
+        "surname": "Szymańska",
+        "email": "agnieszka.zielińska@example.com",
+        "role": "Użytkownik",
+        "groupName": "Kadry",
+        "holidays": 2
+    },
+    {
+        "id": "68f50d4f-7973-43f1-a79b-0c90bcd90c78",
+        "name": "Magdalena",
+        "surname": "Kowalska",
+        "email": "krzysztof.wójcik@example.com",
+        "role": "Użytkownik",
+        "groupName": "Marketing",
+        "holidays": 1
+    },
+
+    {
+        "id": "03c7ffbe-68c6-4e83-8e10-7b989dd374e3",
+        "name": "Karolina",
+        "surname": "Dąbrowska",
+        "email": "magdalena.lewandowski@example.com",
+        "role": "Kadry",
+        "groupName": "IT",
+        "holidays": 3
+    },
+    {
+        "id": "b7ff88ef-aebd-4c50-bdba-b20ec81b8029",
+        "name": "Adam",
+        "surname": "Nowak",
+        "email": "tomasz.wiśniewski@example.com",
+        "role": "Team leader",
+        "groupName": "Finanse",
+        "holidays": 7
+    },
+    {
+        "id": "88e18d86-e7d0-4b01-b94f-a12bcf7a3657",
+        "name": "Krzysztof",
+        "surname": "Kowalski",
+        "email": "piotr.kowalski@example.com",
+        "role": "Użytkownik",
+        "groupName": "Sales",
+        "holidays": 24
+    }
+]
