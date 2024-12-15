@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
             <div className="navbar-content">
                 {userName && (
                     <Link to="/profile" className="navbar-greeting">
-                        Witaj, <span className="user-name">{userName}</span>
+                        Witaj, <span className="user-name">{userName}!</span>
                     </Link>
                 )}
                 <ul className="nav-links">

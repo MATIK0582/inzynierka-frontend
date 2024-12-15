@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import PendingVacationTable from '../../components/PendingVacationTable/PendingVacationTable';
 import HolidayDetailsModal from '../../components/HolidayDetailsModal';
 import Cookies from 'js-cookie';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import './PendingVacationsPage.scss';
 
 interface Holiday {
@@ -18,6 +19,12 @@ interface Holiday {
     updatedAt: string;
     name: string;
     surname: string;
+}
+
+interface DecodedToken {
+    id: string;
+    role: string;
+    exp: number;
 }
 
 const PendingVacationsPage = () => {
@@ -37,6 +44,12 @@ const PendingVacationsPage = () => {
                 const accessToken = Cookies.get('access_token');
                 if (!accessToken) throw new Error('Brak tokenu dostępu.');
 
+                // Decode JWT to get userId and role
+                const decodedToken: DecodedToken = jwtDecode(accessToken);
+                console.log(decodedToken)
+                const currentUserId = decodedToken.id;
+                const userRole = decodedToken.role;
+
                 const response = await fetch('http://localhost:5000/holiday/all', {
                     method: 'GET',
                     headers: {
@@ -52,8 +65,19 @@ const PendingVacationsPage = () => {
                 const responseData = await response.json();
                 const holidaysData: Holiday[] = JSON.parse(responseData.message);
 
-                const pending = holidaysData.filter((holiday) => holiday.status === 'pending');
-                setPendingHolidays(pending);
+                let filteredHolidays: Holiday[] = holidaysData.filter((holiday) => holiday.status === 'pending');
+
+                // Filter holidays based on user's role
+                if (userRole === 'team_leader' || userRole === 'human_resources') {
+                    filteredHolidays = filteredHolidays.filter((holiday) => holiday.userId !== currentUserId);
+                }
+
+                // If user is admin, no filtering is applied (all holidays are displayed)
+                if (userRole === 'admin') {
+                    filteredHolidays = holidaysData.filter((holiday) => holiday.status === 'pending');
+                }
+
+                setPendingHolidays(filteredHolidays);
             } catch (error: any) {
                 console.error('Błąd podczas pobierania urlopów:', error);
                 setError(error.message || 'Wystąpił nieznany błąd.');
