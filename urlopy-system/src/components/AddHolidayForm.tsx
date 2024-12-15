@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { HolidayType } from '../utils/holidayTypes';
-import { isBefore, parseISO, format } from 'date-fns';
+import { format } from 'date-fns';
 import Cookies from 'js-cookie';
 
 interface AddHolidayFormInputs {
@@ -27,6 +27,8 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
         },
     });
 
+    const [backendError, setBackendError] = useState<string | null>(null); // Stan na komunikat błędu z backendu
+
     const startDate = watch('startDate');
     const holidayType = watch('holidayType');
 
@@ -49,9 +51,11 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
 
     const onSubmit = async (data: AddHolidayFormInputs) => {
 
-        console.log(data);
+        console.log(data)
 
         try {
+            setBackendError(null); // Resetowanie błędu przed nowym zapytaniem
+
             const accessToken = Cookies.get('access_token');
             if (!accessToken) {
                 throw new Error('Brak tokena dostępu. Proszę się zalogować.');
@@ -73,12 +77,14 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
             if (!response.ok) {
                 const errorResponse = await response.json();
                 console.error('Błąd:', errorResponse.message);
+                setBackendError(errorResponse.message); // Ustawienie wiadomości błędu z backendu
                 return;
             }
 
             onSubmitSuccess();
-        } catch (error) {
+        } catch (error: any) {
             console.error('Nie udało się dodać urlopu:', error);
+            setBackendError('Nie udało się dodać urlopu. Spróbuj ponownie później.');
         }
     };
 
@@ -115,7 +121,6 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                         },
                     })}
                 />
-                {/* @TODO: Past date error: Border red when startdate is changed */}
                 {errors.endDate && <span className="error-message">{errors.endDate.message}</span>}
             </div>
 
@@ -128,6 +133,12 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                 >
                     <option value={HolidayType.ANNUAL}>Wypoczynkowy</option>
                     <option value={HolidayType.SICK}>Chorobowy</option>
+                    <option value={HolidayType.UNPAID}>Bezpłatny</option>
+                    <option value={HolidayType.MATERNITY}>Macierzyński</option>
+                    <option value={HolidayType.PATERNITY}>Ojcowski</option>
+                    <option value={HolidayType.PARENTAL}>Rodzicielski</option>
+                    <option value={HolidayType.CHILDCARE}>Wypoczynkowy</option>
+                    <option value={HolidayType.OCCASIONAL}>Okolicznościowy</option>
                 </select>
                 {errors.holidayType && <span className="error-message">{errors.holidayType.message}</span>}
             </div>
@@ -157,7 +168,9 @@ const AddHolidayForm: React.FC<{ onSubmitSuccess: () => void }> = ({ onSubmitSuc
                 />
             </div>
 
+            {backendError && <p className="error-message backend-error">{backendError}</p>}
             <button type="submit">Dodaj urlop</button>
+
         </form>
     );
 };

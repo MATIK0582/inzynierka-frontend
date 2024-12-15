@@ -1,17 +1,17 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import Vacations from '../../features/Vacations/Vacations';
-import './VacationsPage.scss';
+import UserVacations from '../../features/UserVacations/UserVacations';
+import './UserVacationPage.scss';
 
-const VacationsPage: React.FC = () => {
+const UserVacationsPage: React.FC = () => {
     return (
         <div className="home-page">
             <Navbar />
             <main className="main-content">
-                <Vacations />
+                <UserVacations />
             </main>
         </div>
     );
 };
 
-export default VacationsPage;
+export default UserVacationsPage;

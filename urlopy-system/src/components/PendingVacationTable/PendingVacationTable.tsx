@@ -22,10 +22,7 @@ interface PendingVacationTableProps {
 }
 
 const PendingVacationTable: React.FC<PendingVacationTableProps> = ({ data, columns, onRowClick }) => {
-    const [localData, setLocalData] = useState(data); // Przechowywanie lokalnego stanu tabeli
-
-    // console.log(data);
-
+    const [localData, setLocalData] = useState(data);
     const handleAcceptHoliday = async (id: string) => {
         const confirmAction = window.confirm('Czy na pewno chcesz zaakceptować ten urlop?');
         if (!confirmAction) return;

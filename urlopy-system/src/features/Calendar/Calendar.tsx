@@ -3,8 +3,9 @@ import Calendar from 'react-calendar';
 import { isWithinInterval, parseISO } from 'date-fns';
 import HolidayDetailsModal from '../../components/HolidayDetailsModal';
 import AddHolidayModal from '../../components/AddHolidayModal';
-import holidaysData from '../../mocks/holidays.json';
 import AddHolidayForm from '../../components/AddHolidayForm';
+import { getHolidaysForYear } from '../../utils/holidays/getHolidaysForYear';
+import Cookies from 'js-cookie';
 
 interface Holiday {
     startDate: string;
@@ -16,12 +17,44 @@ interface Holiday {
 
 const CalendarView = () => {
     const [holidays, setHolidays] = useState<Holiday[]>([]);
+    const [publicHolidays, setPublicHolidays] = useState<Date[]>([]); // Święta publiczne
     const [selectedHoliday, setSelectedHoliday] = useState<Holiday | null>(null);
     const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
     const [isAddHolidayModalOpen, setIsAddHolidayModalOpen] = useState(false);
 
     useEffect(() => {
-        setHolidays(holidaysData);
+        const currentYear = new Date().getFullYear();
+        const publicHolidaysForYear = getHolidaysForYear(currentYear);
+        setPublicHolidays(publicHolidaysForYear);
+    }, []);
+
+    useEffect(() => {
+        const fetchHolidays = async () => {
+            try {
+                const accessToken = Cookies.get('access_token');
+                if (!accessToken) throw new Error('Brak tokenu dostępu.');
+
+                const response = await fetch('http://localhost:5000/holiday/own', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Nie udało się pobrać danych o urlopach.');
+                }
+
+                const responseData = await response.json();
+                const holidaysData: Holiday[] = JSON.parse(responseData.message);
+                setHolidays(holidaysData);
+            } catch (error) {
+                console.error('Błąd podczas pobierania urlopów:', error);
+            }
+        };
+
+        fetchHolidays();
     }, []);
 
     const handleHolidayClick = (holiday: Holiday) => {
@@ -51,15 +84,34 @@ const CalendarView = () => {
                                 handleHolidayClick(holiday);
                             }}
                         >
-                            {holiday.description}
+                            {holiday.holidayType}
                         </div>
                     ))}
-                    {dayHolidays.length > 3 && <div className="holiday-more">+{dayHolidays.length - 3} more</div>}
+                    {dayHolidays.length > 3 && <div className="holiday-more">+{dayHolidays.length - 3} więcej</div>}
                 </div>
             );
         }
 
         return null;
+    };
+
+    const isPublicHoliday = (date: Date) => {
+        return publicHolidays.some(
+            (holiday) =>
+                holiday.getDate() === date.getDate() &&
+                holiday.getMonth() === date.getMonth() &&
+                holiday.getFullYear() === date.getFullYear()
+        );
+    };
+
+    const getTileClassName = ({ date, view }: { date: Date; view: string }) => {
+        if (view !== 'month') return '';
+
+        if (isPublicHoliday(date)) {
+            return 'public-holiday'; // Dodajemy klasę dla święta publicznego
+        }
+
+        return '';
     };
 
     return (
@@ -70,18 +122,23 @@ const CalendarView = () => {
                     Dodaj urlop
                 </button>
             </div>
-            <Calendar locale="pl-PL" calendarType="iso8601" tileContent={getTileContent} />
+            <Calendar
+                locale="pl-PL"
+                calendarType="iso8601"
+                tileContent={getTileContent}
+                tileClassName={getTileClassName} // Dodajemy klasę do stylowania
+            />
             <HolidayDetailsModal
                 isOpen={isDetailsModalOpen}
                 holiday={selectedHoliday}
                 onClose={() => setIsDetailsModalOpen(false)}
             />
             <AddHolidayModal isOpen={isAddHolidayModalOpen} onClose={() => setIsAddHolidayModalOpen(false)}>
-                <AddHolidayForm 
+                <AddHolidayForm
                     onSubmitSuccess={() => {
                         console.log('Holiday added successfully');
                         window.location.reload();
-                    }} 
+                    }}
                 />
             </AddHolidayModal>
         </div>

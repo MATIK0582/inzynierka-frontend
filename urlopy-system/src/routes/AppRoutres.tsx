@@ -10,6 +10,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import { Roles } from '../utils/roles';
 import GroupDetailsPage from '../pages/GroupDetails/GroupDetailsPage';
 import EmployeesPage from '../pages/Employee/EmployeesPage';
+import UserVacationsPage from '../pages/UserVacations/UserVacationPage';
 
 const AppRoutes = () => (
     <Router basename="/">
@@ -21,6 +22,14 @@ const AppRoutes = () => (
                 element={
                     <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
                         <ProfilePage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/user-vacations"
+                element={
+                    <ProtectedRoute allowedRoles={[Roles.USER, Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                        <UserVacationsPage />
                     </ProtectedRoute>
                 }
             />

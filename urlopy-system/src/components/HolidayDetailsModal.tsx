@@ -3,7 +3,7 @@ import React from 'react';
 interface HolidayDetails {
     startDate: string;
     endDate: string;
-    description: string;
+    description: string | null;
     holidayType: string;
     status: string;
 }
@@ -34,7 +34,7 @@ const HolidayDetailsModal: React.FC<HolidayDetailsModalProps> = ({ isOpen, holid
                     <strong>Typ urlopu:</strong> <p>{holiday.holidayType}</p>
                 </p>
                 <p>
-                    <strong>Opis:</strong> <p>{holiday.description}</p>
+                    <strong>Opis:</strong> <p>{holiday.description ? holiday.description : 'Brak opisu'}</p>
                 </p>
                 <p>
                     <strong>Status:</strong> <p>{holiday.status}</p>

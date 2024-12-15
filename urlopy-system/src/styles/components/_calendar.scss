@@ -85,7 +85,7 @@
                     white-space: nowrap;
                     color: #000 !important;
 
-                    &.approved {
+                    &.accepted {
                         background-color: rgba(25, 116, 235, 0.8); // Półprzezroczysty niebieski
                     }
 
@@ -135,6 +135,10 @@
             .holiday-container .holiday-indicator {
                 color: #000 !important; // Zachowanie czarnego tekstu opisu
             }
+        }
+
+        .public-holiday {
+            color: red;
         }
     }
 }

@@ -45,17 +45,37 @@ const Login = () => {
                 return;
             }
 
-            // BAAAD
+            // Get access token from response header
             const accessToken = response.headers.get('Authorization')?.replace('Bearer ', '');
             if (!accessToken) {
                 throw new Error('Brak tokena w odpowiedzi.');
             }
 
-            // VERY BAAAAD
+            // Store the access token in cookies
             Cookies.set('access_token', accessToken, {
                 secure: true,
                 sameSite: 'Strict',
             });
+
+            // Fetch the user profile after login
+            const userResponse = await fetch('http://localhost:5000/user/data/own', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+
+            if (!userResponse.ok) {
+                throw new Error('Nie udało się pobrać danych użytkownika.');
+            }
+
+            const userData = await userResponse.json();
+            const userProfile = JSON.parse(userData.message);
+
+            // Store the user's name in localStorage
+            localStorage.setItem('userName', `${userProfile.name}`);
+            // localStorage.setItem('userName', `${userProfile.name} ${userProfile.surname}`);
 
             navigate('/');
         } catch (error) {

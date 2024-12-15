@@ -1,5 +1,11 @@
 export enum HolidayType {
-    ANNUAL = 'annual',
-    ON_DEMAND = 'on_demand',
-    SICK = 'sick',
+    ANNUAL = 'wypoczynkowy',
+    ON_DEMAND = 'na_żądanie',
+    SICK = 'chorobowy',
+    UNPAID = 'bezpłatny',
+    MATERNITY = 'macierzyński',
+    PATERNITY = 'ojcowski',
+    PARENTAL = 'rodzicielski',
+    CHILDCARE = 'wychowawczy',
+    OCCASIONAL = 'okolicznościowy',
 }

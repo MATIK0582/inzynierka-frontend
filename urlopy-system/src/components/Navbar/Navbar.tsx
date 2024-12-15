@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { Roles } from '../../utils/roles';
@@ -9,9 +9,19 @@ const Navbar: React.FC = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const [userName, setUserName] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Get the user's name from localStorage
+        const storedUserName = localStorage.getItem('userName');
+        if (storedUserName) {
+            setUserName(storedUserName);
+        }
+    }, []);
 
     const handleLogout = () => {
         Cookies.remove('access_token');
+        localStorage.removeItem('userName');
         navigate('/login');
     };
 
@@ -24,7 +34,7 @@ const Navbar: React.FC = () => {
             case Roles.USER:
                 links = [
                     { path: '/profile', label: 'Profil' },
-                    { path: '/vacations', label: 'Urlopy' },
+                    { path: '/user-vacations', label: 'Urlopy' },
                     { path: '/', label: 'Kalendarz' },
                 ];
                 break;
@@ -54,9 +64,9 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar">
             <div className="navbar-content">
-                {user && (
+                {userName && (
                     <Link to="/profile" className="navbar-greeting">
-                        Witaj, <span className="user-name">Mateusz!</span>
+                        Witaj, <span className="user-name">{userName}</span>
                     </Link>
                 )}
                 <ul className="nav-links">
