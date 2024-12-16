@@ -74,7 +74,7 @@ const PendingVacationsPage = () => {
 
                 // If user is admin, no filtering is applied (all holidays are displayed)
                 if (userRole === 'admin') {
-                    filteredHolidays = holidaysData.filter((holiday) => holiday.status === 'pending');
+                    filteredHolidays = holidaysData.filter((holiday) => holiday.status === 'pending' || holiday.status === 'accepted_by_team_leader');
                 }
 
                 setPendingHolidays(filteredHolidays);
