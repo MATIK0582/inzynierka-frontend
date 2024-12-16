@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import './GroupsTable.scss';
 
 interface Group {
-    id: string;
-    name: string;
+    groupId: string;
+    groupName: string;
     leaderId: string;
-    numberOfEmployees: number;
+    leaderName: string;
+    leaderSurname: string;
+    employeeCount: number;
 }
 
 interface GroupsTableProps {
@@ -21,15 +23,15 @@ const GroupsTable: React.FC<GroupsTableProps> = ({ data }) => {
         () => [
             {
                 Header: 'Nazwa grupy',
-                accessor: 'name',
+                accessor: 'groupName',
             },
             {
                 Header: 'Lider grupy',
-                accessor: 'leaderId',
+                accessor: (row) => `${row.leaderName} ${row.leaderSurname}`, 
             },
             {
                 Header: 'Liczba pracowników',
-                accessor: 'numberOfEmployees',
+                accessor: 'employeeCount', 
             },
         ],
         []
@@ -57,7 +59,7 @@ const GroupsTable: React.FC<GroupsTableProps> = ({ data }) => {
                     return (
                         <tr
                             {...row.getRowProps()}
-                            onClick={() => navigate(`/groups/${row.original.id}`)} // Przenoszenie na podstronę grupy
+                            onClick={() => navigate(`/groups/${row.original.groupId}`)} 
                             className="clickable-row"
                         >
                             {row.cells.map((cell) => (

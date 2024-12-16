@@ -3,10 +3,11 @@ import { useTable, Column } from 'react-table';
 import './GroupDetailsTable.scss';
 
 interface Employee {
-    id: string;
+    userId: string;
     name: string;
     surname: string;
-    holiday: number;
+    holidays: number;
+    holidaysUponRequest: number;
 }
 
 interface GroupDetailsTableProps {
@@ -18,11 +19,15 @@ const GroupDetailsTable: React.FC<GroupDetailsTableProps> = ({ data }) => {
         () => [
             {
                 Header: 'Pracownik',
-                accessor: (row: Employee) => `${row.name} ${row.surname}`, // Łączenie imienia i nazwiska w jedną kolumnę
+                accessor: (row: Employee) => `${row.name} ${row.surname}`, 
             },
             {
                 Header: 'Pozostałe dni urlopu',
-                accessor: 'holiday', // Dostęp do holiday
+                accessor: 'holidays', 
+            },
+            {
+                Header: 'Urlopy na żądanie',
+                accessor: 'holidaysUponRequest', 
             },
         ],
         []
@@ -32,8 +37,6 @@ const GroupDetailsTable: React.FC<GroupDetailsTableProps> = ({ data }) => {
         columns,
         data,
     });
-
-    console.log(data);
 
     return (
         <table {...getTableProps()} className="group-details-table">

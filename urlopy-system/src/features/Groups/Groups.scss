@@ -1,9 +1,50 @@
 @import '../../styles/variables.scss';
 
 .groups {
-    h1 {
-        text-align: center;
-        color: $primary900;
+    .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-bottom: 20px;
+        border-bottom: 2px solid $secondary;
+
+        h1 {
+            color: $primary900;
+            text-align: left;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .add-group-button {
+            background-color: $secondary;
+            color: $white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken($secondary, 10%);
+            }
+
+            &:disabled {
+                background-color: lighten($secondary, 30%);
+                color: $primary700;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .error-message {
+        color: red;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        text-align: center;
     }
 }
