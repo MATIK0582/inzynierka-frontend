@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import GroupsTable from '../../components/GroupsTable/GroupsTable';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
+import AddGroupModal from '../../components/AddGroupModal/AddGroupModal';
 import './Groups.scss';
 
 interface Group {
@@ -24,6 +25,7 @@ const Groups: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [userRole, setUserRole] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchGroups = async () => {
@@ -64,7 +66,12 @@ const Groups: React.FC = () => {
     }, []);
 
     const handleAddGroup = () => {
-        alert('Dodawanie nowej grupy nie jest jeszcze zaimplementowane.');
+        setIsModalOpen(true);
+    };
+
+    const handleGroupAdded = (newGroup: Group) => {
+        setGroups((prevGroups) => [...prevGroups, newGroup]);
+        setIsModalOpen(false);
     };
 
     return (
@@ -85,7 +92,15 @@ const Groups: React.FC = () => {
             {loading ? (
                 <p>Ładowanie danych...</p>
             ) : (
-                <GroupsTable data={groups} />
+                <>
+                    <GroupsTable data={groups} />
+                    {isModalOpen && (
+                        <AddGroupModal 
+                            onGroupAdded={handleGroupAdded} 
+                            onClose={() => setIsModalOpen(false)} 
+                        />
+                    )}
+                </>
             )}
         </div>
     );
