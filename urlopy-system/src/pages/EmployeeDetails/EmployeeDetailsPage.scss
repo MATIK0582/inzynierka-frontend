@@ -1,0 +1,188 @@
+@import '../../styles/variables.scss';
+
+html {
+    background-color: $primary;
+}
+
+.employee-details-page {
+    .main-content {
+        flex: 1 1;
+        background-color: $primary;
+        padding: 40px;
+
+        .header-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 2px solid $secondary;
+
+            h1 {
+                color: $primary900;
+                text-align: right;
+                font-size: 48px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+        }
+
+        .employee-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            margin-bottom: 20px;
+
+            h1 {
+                font-size: 48px;
+                font-weight: bold;
+                color: $primary900;
+                margin-bottom: 0px;
+            }
+
+            h4 {
+                font-size: 16px;
+                color: $primary700;
+                margin-top: 0;
+            }
+        }
+
+        .employee-details {
+            h1 {
+                text-align: right;
+                font-size: 48px;
+                font-weight: bold;
+                color: $primary900;
+                margin-bottom: 0px;
+            }
+
+            h4 {
+                text-align: right;
+                font-size: 16px;
+                color: $primary700;
+                margin-top: 0;
+            }
+        }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .pending-holidays,
+        .accepted-holidays {
+            margin-bottom: 40px;
+
+            h2 {
+                color: $primary900;
+                font-size: 24px;
+                margin-bottom: 10px;
+                border-bottom: 2px solid $secondary;
+                padding-bottom: 5px;
+            }
+
+            h3 {
+                color: $primary800;
+                font-size: 20px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid $primary300;
+                padding-bottom: 5px;
+            }
+
+            .vacation-table,
+            .pending-vacation-table {
+                tbody {
+                    max-height: 250px; 
+                    overflow-y: auto;
+                }
+            }
+        }
+
+        .pending-holidays {
+            .pending-vacation-table {
+                tbody {
+                    max-height: 250px; 
+                    overflow-y: auto;
+                }
+            }
+        }
+
+        .accepted-holidays {
+            .vacation-table {
+                tbody {
+                    max-height: 250px; 
+                    overflow-y: auto;
+                }
+            }
+        }
+    }
+
+    @media (max-width: $md-breakpoint) {
+        .main-content {
+            padding: 20px;
+
+            .employee-info {
+                h1 {
+                    font-size: 36px;
+                }
+
+                h4 {
+                    font-size: 14px;
+                }
+            }
+
+            .pending-holidays,
+            .accepted-holidays {
+                h2 {
+                    font-size: 20px;
+                }
+
+                h3 {
+                    font-size: 18px;
+                }
+            }
+
+            .pending-vacation-table,
+            .vacation-table {
+                tbody {
+                    max-height: 200px; 
+                }
+            }
+        }
+    }
+
+    @media (max-width: $sm-breakpoint) {
+        .main-content {
+            padding: 10px;
+
+            .employee-info {
+                h1 {
+                    font-size: 28px;
+                }
+
+                h4 {
+                    font-size: 12px;
+                }
+            }
+
+            .pending-holidays,
+            .accepted-holidays {
+                h2 {
+                    font-size: 18px;
+                }
+
+                h3 {
+                    font-size: 16px;
+                }
+            }
+
+            .pending-vacation-table,
+            .vacation-table {
+                tbody {
+                    max-height: 150px; 
+                }
+            }
+        }
+    }
+}
