@@ -1,24 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import EmployeesTable from '../../components/EmployeesTable/EmployeesTable';
-import mockEmployeesData from '../../mocks/new_employees.json';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 import './Employees.scss';
 
 interface Employee {
-    id: string;
+    userId: string;
     name: string;
     surname: string;
-    email: string;
     role: string;
+    groupId: string;
     groupName: string;
     holidays: number;
+    holidaysUponRequest: number;
+}
+
+interface DecodedToken {
+    id: string;
+    role: string;
+    exp: number;
 }
 
 const Employees: React.FC = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Symulacja pobierania danych z pliku mock
-        setEmployees(mockEmployeesData as Employee[]);
+        const fetchEmployees = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+
+                const accessToken = Cookies.get('access_token');
+                if (!accessToken) throw new Error('Brak tokenu dostępu.');
+
+                // Dekodowanie access tokena, aby uzyskać rolę użytkownika
+                const decodedToken: DecodedToken = jwtDecode(accessToken);
+                const userRole = decodedToken.role;
+
+                // Wybór endpointu na podstawie roli użytkownika
+                const endpoint = 
+                    userRole === 'team_leader' 
+                        ? 'http://localhost:5000/user/data/group' 
+                        : 'http://localhost:5000/user/data/all';
+
+                const response = await fetch(endpoint, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Nie udało się pobrać danych o pracownikach.');
+                }
+
+                const responseData = await response.json();
+                const employeesData: Employee[] = JSON.parse(responseData.message);
+
+                setEmployees(employeesData);
+            } catch (error: any) {
+                console.error('Błąd podczas pobierania pracowników:', error);
+                setError(error.message || 'Wystąpił nieznany błąd.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchEmployees();
     }, []);
 
     return (
@@ -29,7 +80,14 @@ const Employees: React.FC = () => {
                     Dodaj pracownika
                 </button>
             </div>
-            <EmployeesTable data={employees} />
+
+            {error && <div className="error-message">{error}</div>}
+
+            {loading ? (
+                <p>Ładowanie danych...</p>
+            ) : (
+                <EmployeesTable data={employees} />
+            )}
         </div>
     );
 };

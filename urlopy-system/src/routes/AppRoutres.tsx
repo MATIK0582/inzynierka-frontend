@@ -11,6 +11,7 @@ import { Roles } from '../utils/roles';
 import GroupDetailsPage from '../pages/GroupDetails/GroupDetailsPage';
 import EmployeesPage from '../pages/Employee/EmployeesPage';
 import UserVacationsPage from '../pages/UserVacations/UserVacationPage';
+import EmployeeDetailsPage from '../pages/EmployeeDetails/EmployeeDetailsPage';
 
 const AppRoutes = () => (
     <Router basename="/">
@@ -68,8 +69,16 @@ const AppRoutes = () => (
             <Route
                 path="/employees"
                 element={
-                    <ProtectedRoute allowedRoles={[Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                    <ProtectedRoute allowedRoles={[Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
                         <EmployeesPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/employees/:id"
+                element={
+                    <ProtectedRoute allowedRoles={[Roles.TEAM_LEADER, Roles.HUMAN_RESOURCE, Roles.ADMIN]}>
+                        <EmployeeDetailsPage />
                     </ProtectedRoute>
                 }
             />
