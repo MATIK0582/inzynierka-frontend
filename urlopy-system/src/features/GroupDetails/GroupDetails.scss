@@ -44,6 +44,29 @@
             }
         }
 
+        .remove-employee-button {
+            background-color: #f44336;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 20px;
+
+            &:disabled {
+                background-color: lighten($secondary, 30%);
+                color: $primary700;
+                cursor: not-allowed;
+            }
+        }
+        
+        .remove-employee-button:disabled {
+            background-color: #e0e0e0;
+            cursor: not-allowed;
+        }
+        
+
         .delete-group-button {
             background-color: #f44336;
             color: #fff;
