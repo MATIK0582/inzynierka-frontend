@@ -9,7 +9,7 @@ interface Holiday {
     userId: string;
     startDate: string;
     endDate: string;
-    description: string;
+    description: string | null;
     holidayType: string;
     status: string;
     createdAt: string;

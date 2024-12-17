@@ -8,11 +8,17 @@ import { getHolidaysForYear } from '../../utils/holidays/getHolidaysForYear';
 import Cookies from 'js-cookie';
 
 interface Holiday {
+    id: string;
+    userId: string;
     startDate: string;
     endDate: string;
-    description: string;
+    description: string | null;
     holidayType: string;
     status: string;
+    createdAt: string;
+    updatedAt: string;
+    name: string;
+    surname: string;
 }
 
 const CalendarView = () => {
