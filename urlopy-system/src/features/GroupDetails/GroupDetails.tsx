@@ -34,9 +34,6 @@ const GroupDetails: React.FC<GroupDetailsProps> = ({ groupId }) => {
     const [error, setError] = useState<string | null>(null);
     const [userRole, setUserRole] = useState<string | null>(null);
 
-    /**
-     * Funkcja pobierająca szczegóły grupy oraz pracowników z grupy
-     */
     const fetchGroupDetails = async () => {
         try {
             setLoading(true);
@@ -61,7 +58,6 @@ const GroupDetails: React.FC<GroupDetailsProps> = ({ groupId }) => {
             const responseData = await response.json();
             const employeesData: Employee[] = JSON.parse(responseData.message);
 
-            // Wybieranie lidera grupy spośród pracowników
             const leader = employeesData.find(employee => employee.role === 'team_leader');
             if (leader) {
                 setLeaderName(`${leader.name} ${leader.surname}`);
@@ -77,9 +73,34 @@ const GroupDetails: React.FC<GroupDetailsProps> = ({ groupId }) => {
         }
     };
 
-    /**
-     * Efekt uruchamiany podczas montowania komponentu
-     */
+    const handleDeleteGroup = async () => {
+        const confirmation = window.confirm('Czy na pewno chcesz usunąć tę grupę? Tego działania nie można cofnąć.');
+        if (!confirmation) return;
+
+        try {
+            const accessToken = Cookies.get('access_token');
+            if (!accessToken) throw new Error('Brak tokenu dostępu.');
+
+            const response = await fetch('http://localhost:5000/group/delete', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify({ groupId }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Nie udało się usunąć grupy.');
+            }
+
+            alert('Grupa została usunięta.');
+            window.location.href = '/groups'; 
+        } catch (error: any) {
+            alert('Wystąpił błąd podczas usuwania grupy.');
+        }
+    };
+
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
         if (!accessToken) return;
@@ -98,27 +119,32 @@ const GroupDetails: React.FC<GroupDetailsProps> = ({ groupId }) => {
                 <h1 className="error-message">{error}</h1>
             ) : (
                 <>
-                    {/* Nazwa grupy */}
                     <h1>Grupa: {employees[0]?.groupName}</h1>
 
                     <div className="header-wrapper">
-                        {/* Lider grupy */}
                         <h4>Lider zespołu: {leaderName}</h4>
 
-                        {/* Przycisk dodawania pracownika */}
-                        <button 
-                            className="add-employee-button" 
-                            onClick={() => setIsModalOpen(true)} 
-                            disabled={userRole === 'team_leader'}
-                        >
-                            Dodaj pracownika
-                        </button>
+                        <div className="button-wrapper">
+                            <button 
+                                className="add-employee-button" 
+                                onClick={() => setIsModalOpen(true)} 
+                                disabled={userRole === 'team_leader'}
+                            >
+                                Dodaj pracownika
+                            </button>
+
+                            <button 
+                                className="delete-group-button" 
+                                onClick={handleDeleteGroup} 
+                                disabled={userRole === 'team_leader'}
+                            >
+                                Usuń grupę
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Tabela z pracownikami */}
                     <GroupDetailsTable data={employees} />
 
-                    {/* Modal dodawania pracownika */}
                     {isModalOpen && (
                         <AddEmployeeToGroupModal 
                             groupId={groupId} 
